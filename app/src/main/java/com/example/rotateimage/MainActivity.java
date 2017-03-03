@@ -74,9 +74,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         float endX = event.getRawX();
         float endY = event.getRawY();
-        float angle = computeAngle(centerX, centerY, startX, startY, endX, endY);
+        float angle = RotateUtil.computeAngle(centerX, centerY, startX, startY, endX, endY);
         Log.e("xianwei", angle + "");
-        if (isClockWise(centerX, centerY, startX, startY, endX, endY)) {
+        if (RotateUtil.isClockWise(centerX, centerY, startX, startY, endX, endY)) {
             setRotate(angle, 1);
         } else {
             setRotate(-angle, 1);
@@ -86,50 +86,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
 
-    private float computeAngle(float centerX, float centerY, float startX, float startY, float endX, float endY) {
-        double ab = Math.sqrt((centerX - startX) * (centerX - startX) + (centerY - startY) * (centerY - startY));
-        double ac = Math.sqrt((centerX - endX) * (centerX - endX) + (centerY - endY) * (centerY - endY));
-        double bc = Math.sqrt((endX - startX) * (endX - startX) + (endY - startY) * (endY - startY));
-        double cos = (ab * ab + ac * ac - bc * bc) / 2 / ab / ac;
-        if (cos >= 1) {
-            return 0;
-        }
-        return (float) (Math.acos(cos) / Math.PI * 180);
-    }
 
-    private boolean isClockWise(float centerX, float centerY, float startX, float startY, float endX, float endY) {
-        float endDY = (endX - centerX) / (startX - centerX) * (startY - centerY) + centerY;
-        Log.e("xianwei", startX + "---startX---" + centerX + "---centerX---" + endY + "---endY---" + endDY + "---endDY---");
-        if (startX > centerX) {
-            if (endY > endDY) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-        if (startX < centerX) {
-            if (endY > endDY) {
-                return false;
-            } else {
-                return true;
-            }
-        }
-        if (startX == centerX) {
-            if (startY < centerY) {
-                if (endX > centerX) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-            if (startY > centerY) {
-                if (endX < centerX) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
 }
