@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void setRotate(float rotate, int time) {
         ObjectAnimator anim = ObjectAnimator.ofFloat(rl, "rotation", mAngle, mAngle + rotate);
         anim.setDuration(time);
+        anim.start();
         mAngle = (mAngle + rotate) % 360;
     }
 
