@@ -1,5 +1,6 @@
 package com.example.rotateimage;
 
+import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.support.v4.view.GestureDetectorCompat;
@@ -48,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void setRotate(float rotate, int time) {
         ObjectAnimator anim = ObjectAnimator.ofFloat(rl, "rotation", mAngle, mAngle + rotate);
         anim.setDuration(time);
-        anim.start();
         mAngle = (mAngle + rotate) % 360;
     }
 
